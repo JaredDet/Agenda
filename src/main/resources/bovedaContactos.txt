@@ -1,0 +1,10 @@
+  Nombre = Javier
+  Apellido = Marquez
+  NumTelefono = +56945303715
+  Direccion = Barros_Arana_843
+  FechaCreacion = Sat May 22 01:50:06 CLT 2021
+  Nombre = Victor
+  Apellido = Mardones
+  NumTelefono = +56971523337
+  Direccion = Av_12_Febrero_1042
+  FechaCreacion = Sat May 22 01:51:38 CLT 2021
