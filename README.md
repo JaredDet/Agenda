@@ -1,0 +1,3 @@
+# Agenda
+Agenda funcional, totalmente validada; pero sin pruebas unitarias.
+En proceso...
