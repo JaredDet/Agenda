@@ -9,27 +9,19 @@ public class Agenda {
 	}
 
 	public void ordenarContactosFecha() {
-		contactos.sort(new Comparator<Contacto>() {
-			@Override
-			public int compare(Contacto o1, Contacto o2) {
-				return o1.getFechaCreacion().compareTo(o2.getFechaCreacion());
-			}
-		});
+		contactos.sort(Comparator.comparing(Contacto::getFechaCreacion));
 	}
 
 	public void ordenarContactosNombre() {
 
-		contactos.sort(new Comparator<Contacto>() {
-			@Override
-			public int compare(Contacto o1, Contacto o2) {
-				if(o1.getNombre().equals(o2.getNombre())){
-					if(o1.getApellido().equals(o2.getApellido())){
-						return o1.getNumTelefono().compareTo(o2.getNumTelefono());
-					}
-					return o1.getApellido().compareTo(o2.getApellido());
+		contactos.sort((o1, o2) -> {
+			if (o1.getNombre().equals(o2.getNombre())) {
+				if (o1.getApellido().equals(o2.getApellido())) {
+					return o1.getNumTelefono().compareTo(o2.getNumTelefono());
 				}
-				return o1.getNombre().compareTo(o2.getNombre());
+				return o1.getApellido().compareTo(o2.getApellido());
 			}
+			return o1.getNombre().compareTo(o2.getNombre());
 		});
 	}
 
@@ -67,7 +59,7 @@ public class Agenda {
 		do {
 			System.out.println("\n"+"Número telefónico de contacto: ");
 			numTelefono = String.valueOf(Validador.entradaInt());
-		}while(!Validador.validarNumTelefono(numTelefono) || !verificarNumContacto(numTelefono));
+		}while(!Validador.validarNumTelefono(numTelefono) || verificarNumContacto(numTelefono));
 
 		System.out.println("\n"+"Dirección de contacto");
 		String direccion = Validador.entradaString();
@@ -81,14 +73,14 @@ public class Agenda {
 
 		for (Contacto contacto : contactos) {
 			if(contacto.getNumTelefono().equals(numero)) {
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 	private void modificarContacto(Contacto contacto) {
 
-		int opcion = 0;
+		int opcion;
 
 		do {
 			mostrarInfoEdicion();
@@ -116,7 +108,7 @@ public class Agenda {
 					do {
 						System.out.println("\n"+"Número telefónico de contacto: ");
 						numTelefono = String.valueOf(Validador.entradaInt());
-					}while(!Validador.validarNumTelefono(numTelefono) || !verificarNumContacto(numTelefono));
+					}while(!Validador.validarNumTelefono(numTelefono) || verificarNumContacto(numTelefono));
 					contacto.setNumTelefono(numTelefono);
 				}
 				case 4 -> {
@@ -133,7 +125,7 @@ public class Agenda {
 
 		for (Contacto contacto : contactos) {
 
-			if (contacto.getNumTelefono().equals("+569" + String.valueOf(numTelefono))) {
+			if (contacto.getNumTelefono().equals("+569" + numTelefono)) {
 				modificarContacto(contacto);
 				System.out.println("Se ha modificado el contacto sin problemas");
 				return;
@@ -146,7 +138,7 @@ public class Agenda {
 
 		for(Contacto contacto : contactos) {
 
-			if (contacto.getNumTelefono().equals("+569" + String.valueOf(numTelefono))){
+			if (contacto.getNumTelefono().equals("+569" + numTelefono)){
 				contactos.remove(contacto);
 				System.out.println("El contacto se ha eliminado sin problemas");
 				return;
@@ -166,7 +158,10 @@ public class Agenda {
 
 	private void mostrarMenu(){
 
-		System.out.println("\n" + "Bienvenido al menú" + "\n");
+		System.out.println("""
+
+				Bienvenido al menú
+				""");
 		System.out.println("Elija una opción" + "\n");
 		System.out.println("[1] Agregar un contacto");
 		System.out.println("[2] Editar un contacto");
@@ -193,7 +188,7 @@ public class Agenda {
 		if(archivo.getArchivo().exists()){
 			cargarContactos(archivo);
 		}
-		int opcion = 0;
+		int opcion;
 
 		do {
 			mostrarMenu();
@@ -252,5 +247,9 @@ public class Agenda {
 			archivoGuardado.append(contacto.toString());
 		}
 		return archivoGuardado.toString();
+	}
+
+	public ArrayList<Contacto> getContactos() {
+		return contactos;
 	}
 }

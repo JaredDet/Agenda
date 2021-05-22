@@ -6,7 +6,7 @@ public class Archivo {
 
     private final String ruta = "src/main/resources/bovedaContactos.txt";
     private final File archivo = new File(ruta);
-    private final ArrayList<String> informacion = new ArrayList<>();
+    private ArrayList<String> informacion = new ArrayList<>();
     private String valor = "";
 
 
@@ -17,7 +17,7 @@ public class Archivo {
     private void crearArchivo(){
 
         try {
-            archivo.createNewFile();
+            boolean b = archivo.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,7 +43,7 @@ public class Archivo {
                 informacion.add("El archivo no existe");
                 return;
             }
-            String[] lineas = new String[2];
+            String[] lineas;
             FileReader file = new FileReader(archivo);
             BufferedReader lector = new BufferedReader(file);
             String cadena;
@@ -76,5 +76,9 @@ public class Archivo {
     }
     public File getArchivo() {
         return archivo;
+    }
+
+    public ArrayList<String> getInformacion() {
+        return informacion;
     }
 }
