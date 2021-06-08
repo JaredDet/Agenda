@@ -1,3 +1,3 @@
 # Agenda
-Agenda funcional, totalmente validada; pero sin pruebas unitarias.
+Agenda funcional, totalmente validada; pero sin pruebas unitarias de la clase Agenda.
 En proceso...
