@@ -70,10 +70,6 @@ public class Archivo {
         this.valor = valor;
     }
 
-    public void getValor(String valor) {
-
-        this.valor = valor;
-    }
     public File getArchivo() {
         return archivo;
     }
